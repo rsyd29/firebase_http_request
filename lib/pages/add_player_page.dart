@@ -32,45 +32,31 @@ class AddPlayer extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          child: Column(
-            children: [
-              TextFormField(
-                autocorrect: false,
-                autofocus: true,
-                decoration: const InputDecoration(labelText: "Nama"),
-                textInputAction: TextInputAction.next,
-                controller: nameController,
-              ),
-              TextFormField(
-                autocorrect: false,
-                decoration: const InputDecoration(labelText: "Posisi"),
-                textInputAction: TextInputAction.next,
-                controller: positionController,
-              ),
-              TextFormField(
-                autocorrect: false,
-                decoration: const InputDecoration(labelText: "Image URL"),
-                textInputAction: TextInputAction.done,
-                controller: imageController,
-                onEditingComplete: () {
-                  players.addPlayer(
-                    nameController.text,
-                    positionController.text,
-                    imageController.text,
-                    context,
-                  );
-                  Navigator.pop(context);
-                },
-              ),
-              const SizedBox(height: 50),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.centerRight,
-                child: OutlinedButton(
-                  onPressed: () {
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            child: Column(
+              children: [
+                TextFormField(
+                  autocorrect: false,
+                  autofocus: true,
+                  decoration: const InputDecoration(labelText: "Nama"),
+                  textInputAction: TextInputAction.next,
+                  controller: nameController,
+                ),
+                TextFormField(
+                  autocorrect: false,
+                  decoration: const InputDecoration(labelText: "Posisi"),
+                  textInputAction: TextInputAction.next,
+                  controller: positionController,
+                ),
+                TextFormField(
+                  autocorrect: false,
+                  decoration: const InputDecoration(labelText: "Image URL"),
+                  textInputAction: TextInputAction.done,
+                  controller: imageController,
+                  onEditingComplete: () {
                     players.addPlayer(
                       nameController.text,
                       positionController.text,
@@ -79,15 +65,31 @@ class AddPlayer extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   },
-                  child: const Text(
-                    "Submit",
-                    style: TextStyle(
-                      fontSize: 18,
+                ),
+                const SizedBox(height: 50),
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.centerRight,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      players.addPlayer(
+                        nameController.text,
+                        positionController.text,
+                        imageController.text,
+                        context,
+                      );
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "Submit",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -23,60 +23,45 @@ class DetailPlayer extends StatelessWidget {
       appBar: AppBar(
         title: const Text("DETAIL PLAYER"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Container(
-                  width: 150,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(imageController.text),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(imageController.text),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              TextFormField(
-                autocorrect: false,
-                autofocus: true,
-                decoration: const InputDecoration(labelText: "Nama"),
-                textInputAction: TextInputAction.next,
-                controller: nameController,
-              ),
-              TextFormField(
-                autocorrect: false,
-                decoration: const InputDecoration(labelText: "Posisi"),
-                textInputAction: TextInputAction.next,
-                controller: positionController,
-              ),
-              TextFormField(
-                autocorrect: false,
-                decoration: const InputDecoration(labelText: "Image URL"),
-                textInputAction: TextInputAction.done,
-                controller: imageController,
-                onEditingComplete: () {
-                  players.editPlayer(
-                    playerId,
-                    nameController.text,
-                    positionController.text,
-                    imageController.text,
-                    context,
-                  );
-                  Navigator.pop(context);
-                },
-              ),
-              const SizedBox(height: 50),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.centerRight,
-                child: OutlinedButton(
-                  onPressed: () {
+                TextFormField(
+                  autocorrect: false,
+                  autofocus: true,
+                  decoration: const InputDecoration(labelText: "Nama"),
+                  textInputAction: TextInputAction.next,
+                  controller: nameController,
+                ),
+                TextFormField(
+                  autocorrect: false,
+                  decoration: const InputDecoration(labelText: "Posisi"),
+                  textInputAction: TextInputAction.next,
+                  controller: positionController,
+                ),
+                TextFormField(
+                  autocorrect: false,
+                  decoration: const InputDecoration(labelText: "Image URL"),
+                  textInputAction: TextInputAction.done,
+                  controller: imageController,
+                  onEditingComplete: () {
                     players.editPlayer(
                       playerId,
                       nameController.text,
@@ -86,15 +71,32 @@ class DetailPlayer extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   },
-                  child: const Text(
-                    "Edit",
-                    style: TextStyle(
-                      fontSize: 18,
+                ),
+                const SizedBox(height: 50),
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.centerRight,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      players.editPlayer(
+                        playerId,
+                        nameController.text,
+                        positionController.text,
+                        imageController.text,
+                        context,
+                      );
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "Edit",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
