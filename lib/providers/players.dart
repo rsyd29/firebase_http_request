@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../models/player.dart';
+import 'package:http/http.dart' as http;
 
 class Players with ChangeNotifier {
   final List<Player> _allPlayer = [];
@@ -11,25 +14,41 @@ class Players with ChangeNotifier {
   Player selectById(String id) =>
       _allPlayer.firstWhere((element) => element.id == id);
 
-  void addPlayer(
-      String name, String position, String image, BuildContext context) {
+  Future<void> addPlayer(
+    String name,
+    String position,
+    String image,
+  ) async {
     DateTime datetimeNow = DateTime.now();
-    _allPlayer.add(
-      Player(
-        id: datetimeNow.toString(),
-        name: name,
-        position: position,
-        imageUrl: image,
-        createdAt: datetimeNow,
+
+    Uri url = Uri.parse(
+        "https://http-req-f1594-default-rtdb.asia-southeast1.firebasedatabase.app/players.json");
+    http
+        .post(
+      url,
+      body: json.encode(
+        {
+          "name": name,
+          "position": position,
+          "imageUrl": image,
+          "createdAt": datetimeNow.toString(),
+        },
       ),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Berhasil ditambahkan"),
-        duration: Duration(seconds: 2),
-      ),
-    );
-    notifyListeners();
+    )
+        .then((response) {
+      print("Menambahkan data player ke list");
+      _allPlayer.add(
+        Player(
+          id: json.decode(response.body)['name'].toString(),
+          name: name,
+          position: position,
+          imageUrl: image,
+          createdAt: datetimeNow,
+        ),
+      );
+
+      notifyListeners();
+    });
   }
 
   void editPlayer(String id, String name, String position, String image,
