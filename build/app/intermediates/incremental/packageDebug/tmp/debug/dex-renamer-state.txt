@@ -1,4 +1,0 @@
-#Wed Nov 03 15:39:47 WIB 2021
-base.0=/home/budiman/Documents/Belajar_Flutter/firebase_http_request/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
