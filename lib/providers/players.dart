@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/player.dart';
 
 class Players with ChangeNotifier {
-  List<Player> _allPlayer = [];
+  final List<Player> _allPlayer = [];
 
   List<Player> get allPlayer => _allPlayer;
 
@@ -24,7 +24,7 @@ class Players with ChangeNotifier {
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text("Berhasil ditambahkan"),
         duration: Duration(seconds: 2),
       ),
@@ -40,7 +40,7 @@ class Players with ChangeNotifier {
     selectPlayer.imageUrl = image;
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text("Berhasil diubah"),
         duration: Duration(seconds: 2),
       ),
@@ -51,7 +51,7 @@ class Players with ChangeNotifier {
   void deletePlayer(String id, BuildContext context) {
     _allPlayer.removeWhere((element) => element.id == id);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text("Berhasil dihapus"),
         duration: Duration(milliseconds: 500),
       ),

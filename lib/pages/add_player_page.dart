@@ -9,15 +9,17 @@ class AddPlayer extends StatelessWidget {
   final TextEditingController positionController = TextEditingController();
   final TextEditingController imageController = TextEditingController();
 
+  AddPlayer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final players = Provider.of<Players>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text("ADD PLAYER"),
+        title: const Text("ADD PLAYER"),
         actions: [
           IconButton(
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
             onPressed: () {
               players.addPlayer(
                 nameController.text,
@@ -38,19 +40,19 @@ class AddPlayer extends StatelessWidget {
               TextFormField(
                 autocorrect: false,
                 autofocus: true,
-                decoration: InputDecoration(labelText: "Nama"),
+                decoration: const InputDecoration(labelText: "Nama"),
                 textInputAction: TextInputAction.next,
                 controller: nameController,
               ),
               TextFormField(
                 autocorrect: false,
-                decoration: InputDecoration(labelText: "Posisi"),
+                decoration: const InputDecoration(labelText: "Posisi"),
                 textInputAction: TextInputAction.next,
                 controller: positionController,
               ),
               TextFormField(
                 autocorrect: false,
-                decoration: InputDecoration(labelText: "Image URL"),
+                decoration: const InputDecoration(labelText: "Image URL"),
                 textInputAction: TextInputAction.done,
                 controller: imageController,
                 onEditingComplete: () {
@@ -63,7 +65,7 @@ class AddPlayer extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Container(
                 width: double.infinity,
                 alignment: Alignment.centerRight,
@@ -77,7 +79,7 @@ class AddPlayer extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     "Submit",
                     style: TextStyle(
                       fontSize: 18,

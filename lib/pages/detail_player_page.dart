@@ -6,10 +6,12 @@ import '../providers/players.dart';
 class DetailPlayer extends StatelessWidget {
   static const routeName = "/detail-player";
 
+  const DetailPlayer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final players = Provider.of<Players>(context, listen: false);
-    final playerId = ModalRoute.of(context).settings.arguments as String;
+    final playerId = ModalRoute.of(context)!.settings.arguments as String;
     final selectPLayer = players.selectById(playerId);
     final TextEditingController imageController =
         TextEditingController(text: selectPLayer.imageUrl);
@@ -19,7 +21,7 @@ class DetailPlayer extends StatelessWidget {
         TextEditingController(text: selectPLayer.position);
     return Scaffold(
       appBar: AppBar(
-        title: Text("DETAIL PLAYER"),
+        title: const Text("DETAIL PLAYER"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -43,19 +45,19 @@ class DetailPlayer extends StatelessWidget {
               TextFormField(
                 autocorrect: false,
                 autofocus: true,
-                decoration: InputDecoration(labelText: "Nama"),
+                decoration: const InputDecoration(labelText: "Nama"),
                 textInputAction: TextInputAction.next,
                 controller: nameController,
               ),
               TextFormField(
                 autocorrect: false,
-                decoration: InputDecoration(labelText: "Posisi"),
+                decoration: const InputDecoration(labelText: "Posisi"),
                 textInputAction: TextInputAction.next,
                 controller: positionController,
               ),
               TextFormField(
                 autocorrect: false,
-                decoration: InputDecoration(labelText: "Image URL"),
+                decoration: const InputDecoration(labelText: "Image URL"),
                 textInputAction: TextInputAction.done,
                 controller: imageController,
                 onEditingComplete: () {
@@ -69,7 +71,7 @@ class DetailPlayer extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Container(
                 width: double.infinity,
                 alignment: Alignment.centerRight,
@@ -84,7 +86,7 @@ class DetailPlayer extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     "Edit",
                     style: TextStyle(
                       fontSize: 18,

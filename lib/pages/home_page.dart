@@ -8,15 +8,17 @@ import '../pages/add_player_page.dart';
 import '../providers/players.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final allPlayerProvider = Provider.of<Players>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("ALL PLAYERS"),
+        title: const Text("ALL PLAYERS"),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.pushNamed(context, AddPlayer.routeName);
             },
@@ -24,21 +26,21 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: (allPlayerProvider.jumlahPlayer == 0)
-          ? Container(
+          ? SizedBox(
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "No Data",
                     style: TextStyle(fontSize: 25),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   OutlinedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, AddPlayer.routeName);
                     },
-                    child: Text(
+                    child: const Text(
                       "Add Player",
                       style: TextStyle(fontSize: 20),
                     ),
@@ -60,21 +62,21 @@ class HomePage extends StatelessWidget {
                   },
                   leading: CircleAvatar(
                     backgroundImage: NetworkImage(
-                      allPlayerProvider.allPlayer[index].imageUrl,
+                      allPlayerProvider.allPlayer[index].imageUrl!,
                     ),
                   ),
                   title: Text(
-                    allPlayerProvider.allPlayer[index].name,
+                    allPlayerProvider.allPlayer[index].name!,
                   ),
                   subtitle: Text(
                     DateFormat.yMMMMd()
-                        .format(allPlayerProvider.allPlayer[index].createdAt),
+                        .format(allPlayerProvider.allPlayer[index].createdAt!),
                   ),
                   trailing: IconButton(
                     onPressed: () {
-                      allPlayerProvider.deletePlayer(id, context);
+                      allPlayerProvider.deletePlayer(id!, context);
                     },
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                   ),
                 );
               },
