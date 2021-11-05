@@ -36,7 +36,6 @@ class Players with ChangeNotifier {
       ),
     )
         .then((response) {
-      print("Menambahkan data player ke list");
       _allPlayer.add(
         Player(
           id: json.decode(response.body)['name'].toString(),
@@ -67,14 +66,18 @@ class Players with ChangeNotifier {
     notifyListeners();
   }
 
-  void deletePlayer(String id, BuildContext context) {
-    _allPlayer.removeWhere((element) => element.id == id);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Berhasil dihapus"),
-        duration: Duration(milliseconds: 500),
-      ),
+  Future<void> deletePlayer(String id) async {
+    Uri url = Uri.parse(
+        "https://http-req-f1594-default-rtdb.asia-southeast1.firebasedatabase.app/players/$id.json");
+    http
+        .delete(
+      url,
+    )
+        .then(
+      (response) {
+        _allPlayer.removeWhere((element) => element.id == id);
+        notifyListeners();
+      },
     );
-    notifyListeners();
   }
 }

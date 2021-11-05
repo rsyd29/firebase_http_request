@@ -74,7 +74,14 @@ class HomePage extends StatelessWidget {
                   ),
                   trailing: IconButton(
                     onPressed: () {
-                      allPlayerProvider.deletePlayer(id!, context);
+                      allPlayerProvider.deletePlayer(id!).then(
+                            (_) => ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Berhasil dihapus"),
+                                duration: Duration(milliseconds: 500),
+                              ),
+                            ),
+                          );
                     },
                     icon: const Icon(Icons.delete),
                   ),

@@ -28,7 +28,6 @@ class AddPlayer extends StatelessWidget {
                 imageController.text,
               )
                   .then((response) {
-                print("Kembali ke Home & Memberikan Notif");
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("Berhasil ditambahkan"),
@@ -73,7 +72,6 @@ class AddPlayer extends StatelessWidget {
                       imageController.text,
                     )
                         .then((response) {
-                      print("Kembali ke Home & Memberikan Notif");
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text("Berhasil ditambahkan"),
@@ -98,7 +96,6 @@ class AddPlayer extends StatelessWidget {
                       )
                           .then(
                         (response) {
-                          print("Kembali ke Home & Memberikan Notif");
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text("Berhasil ditambahkan"),
