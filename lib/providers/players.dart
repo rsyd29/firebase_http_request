@@ -50,20 +50,42 @@ class Players with ChangeNotifier {
     });
   }
 
-  void editPlayer(String id, String name, String position, String image,
-      BuildContext context) {
-    Player selectPlayer = _allPlayer.firstWhere((element) => element.id == id);
-    selectPlayer.name = name;
-    selectPlayer.position = position;
-    selectPlayer.imageUrl = image;
+  Future<void> editPlayer(
+    String id,
+    String name,
+    String position,
+    String image,
+  ) async {
+    Uri url = Uri.parse(
+        "https://http-req-f1594-default-rtdb.asia-southeast1.firebasedatabase.app/players/$id.json");
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Berhasil diubah"),
-        duration: Duration(seconds: 2),
+    /**
+     * Bedanya PUT dengan PATCH itu
+     * kalau patch akan update data
+     *
+     * sedangkan
+     *
+     * put akan replace data
+     */
+    http
+        .patch(
+      url,
+      body: json.encode(
+        {
+          "name": name,
+          "position": position,
+          "imageUrl": image,
+        },
       ),
-    );
-    notifyListeners();
+    )
+        .then((response) {
+      Player selectPlayer =
+          _allPlayer.firstWhere((element) => element.id == id);
+      selectPlayer.name = name;
+      selectPlayer.position = position;
+      selectPlayer.imageUrl = image;
+      notifyListeners();
+    });
   }
 
   Future<void> deletePlayer(String id) async {

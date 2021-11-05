@@ -95,7 +95,7 @@ class AddPlayer extends StatelessWidget {
                         imageController.text,
                       )
                           .then(
-                        (response) {
+                        (_) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text("Berhasil ditambahkan"),

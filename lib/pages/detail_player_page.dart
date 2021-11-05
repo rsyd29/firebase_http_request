@@ -62,14 +62,22 @@ class DetailPlayer extends StatelessWidget {
                   textInputAction: TextInputAction.done,
                   controller: imageController,
                   onEditingComplete: () {
-                    players.editPlayer(
+                    players
+                        .editPlayer(
                       playerId,
                       nameController.text,
                       positionController.text,
                       imageController.text,
-                      context,
-                    );
-                    Navigator.pop(context);
+                    )
+                        .then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Berhasil diubah"),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                      Navigator.pop(context);
+                    });
                   },
                 ),
                 const SizedBox(height: 50),
@@ -78,14 +86,22 @@ class DetailPlayer extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: OutlinedButton(
                     onPressed: () {
-                      players.editPlayer(
+                      players
+                          .editPlayer(
                         playerId,
                         nameController.text,
                         positionController.text,
                         imageController.text,
-                        context,
-                      );
-                      Navigator.pop(context);
+                      )
+                          .then((value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Berhasil diubah"),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                        Navigator.pop(context);
+                      });
                     },
                     child: const Text(
                       "Edit",
