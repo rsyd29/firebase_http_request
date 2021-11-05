@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../models/player.dart';
 import 'package:http/http.dart' as http;
 
@@ -101,5 +102,29 @@ class Players with ChangeNotifier {
         notifyListeners();
       },
     );
+  }
+
+  Future<void> initialData() async {
+    Uri url = Uri.parse(
+        "https://http-req-f1594-default-rtdb.asia-southeast1.firebasedatabase.app/players.json");
+
+    var hasilGetData = await http.get(url);
+    var dataResponse = (json.decode(hasilGetData.body) as Map<String, dynamic>);
+    dataResponse.forEach(
+      (key, value) {
+        var dateTimeParse =
+            DateFormat("yyyy-mm-dd hh:mm:ss").parse(value['createdAt']);
+        allPlayer.add(
+          Player(
+            id: key,
+            createdAt: dateTimeParse,
+            imageUrl: value['imageUrl'],
+            name: value['name'],
+            position: value['position'],
+          ),
+        );
+      },
+    );
+    notifyListeners();
   }
 }

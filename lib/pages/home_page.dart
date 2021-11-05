@@ -7,8 +7,24 @@ import '../pages/add_player_page.dart';
 
 import '../providers/players.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (isInit == true) {
+      Provider.of<Players>(context).initialData();
+    }
+    isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
